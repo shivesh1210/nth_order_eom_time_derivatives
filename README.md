@@ -1,6 +1,6 @@
 # Nth Order Analytical Time Derivatives of Inverse Dynamics in Recursive and Closed Forms
 
-This repository contains the MATLAB code for computing nth order analytical time derivatives of Inverse Dynamics in recursive and closed forms using body fixed representation of the twists. This repository accompanies the ICRA 2021 paper: Shivesh Kumar, Andreas Mueller, Nth Order Analytical Time Derivatives of Inverse Dynamics in Recursive and Closed Forms. IEEE ICRA 2021, Xi'an, China.
+This repository contains the MATLAB code for computing nth order analytical time derivatives of Inverse Dynamics in recursive and closed forms using body fixed representation of the twists. This repository accompanies the ICRA 2021 paper: Shivesh Kumar, Andreas Mueller, Nth Order Analytical Time Derivatives of Inverse Dynamics in Recursive and Closed Forms. IEEE ICRA 2021, Xi'an, China. Link to the paper on arxiv: https://arxiv.org/pdf/2103.05941.pdf
 
 # Usage instructions:
 
