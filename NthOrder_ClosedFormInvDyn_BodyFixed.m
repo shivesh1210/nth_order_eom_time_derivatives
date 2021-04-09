@@ -179,11 +179,9 @@ end
 Vnd = zeros(6*n, m-1);
 % Vnd(:,1) = V;
 for i = 0 : m-2     
-%     i
     V_temp = zeros(6*n,1);
     im = i + 1; % matlab index
     for k = 0 : i
-%         k
         order_J = i-k;
         order_qnd = k;
         V_temp = V_temp + nchoosek(i,k)*Jnd(:,:,order_J+1)*qnd(:,order_qnd+2); 
@@ -192,38 +190,7 @@ for i = 0 : m-2
     Vnd(:,im) = V_temp;
 end
 
-% nth order derivative of mass-inertia matrix (verified with analytical 1st and 2nd order derivatives)
-% Mbnd = zeros(6*n,6*n,m);    % system level
-% % Initialization
-% Mbnd(:,:,1) = Mb;   
-% Mbnd(:,:,2) = -Mb*A*a - (Mb*A*a)';
-% for i = 2 : m -1
-%     first_term = zeros(6*n,6*n);
-%     second_term = zeros(6*n,6*n);   
-% %     i
-%     im = i + 1;     % matlab index
-%     for k = 0 : i-1
-% %         k
-%         order_A = i-1-k;
-%         order_a = k;
-%         first_term = first_term + nchoosek(i-1,k)*And(:,:,order_A+1)*and(:,:,order_a+1);
-%     end
-%     first_term = Mb*first_term;
-%     for k = 0 : i-1
-%         order_a = i-1-k;
-%         order_A = k;
-%         second_term = second_term + nchoosek(i-1,k)*and(:,:,order_a+1)'*And(:,:,order_A+1)';
-%     end
-%     second_term = second_term*Mb;
-%     Mb_n_minus_one_dot = - first_term - second_term;
-%     Mbnd(:,:,im) = Mb_n_minus_one_dot - Mbnd(:,:,im-1)*A*a - (Mbnd(:,:,im-1)*A*a)';
-% end
-% Mnd = zeros(n,n,m); % projected to joint space
-% for i = 1:m
-%     Mnd(:,:,i) = J'*Mbnd(:,:,i)*J;
-% end
-
-% 2nd simple implementation of mass matrix derivative
+% implementation of mass matrix derivative
 Mnd = zeros(n,n,m); % projected to joint space
 for i = 0:m-1
     term = zeros(n,n);
@@ -260,31 +227,7 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%% Coriolis-Centrifugal Matrix %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% nth order derivative of coriolis-centrifugal matrix (verified until 1st order, 2nd order not working)
-% Cbnd = zeros(6*n,6*n,m);    % system level
-% % Initialization
-% Cbnd(:,:,1) = Cb;   % coriolis matrix
-% % Cbnd(:,:,2) = Mb*A*a*A*a - Mb*A*a*a - Mb*A*ad - bd'*Mb - Cb*A*a - a'*A'*Cb; % 1st derivative of coriolis matrix
-% for i = 1 : m - 2
-%     first_term = zeros(6*n,6*n);
-% %      i
-%     im = i + 1;     % matlab index
-%     for k = 0 : i
-% %          k
-%         order_A = i-k;
-%         order_a = k;
-%         first_term = first_term + nchoosek(i,k)*And(:,:,order_A+1)*and(:,:,order_a+1);
-%     end
-%     first_term = Mb*first_term;
-%     Cb_n_minus_one_dot = - first_term - bnd(:,:,im)'*Mb;
-%     Cbnd(:,:,im) = Cb_n_minus_one_dot - Cbnd(:,:,im-1)*A*a - a'*A'*Cbnd(:,:,im-1);
-% end
-% Cnd = zeros(n,n,m); % projected to joint space
-% for i = 1:m
-%     Cnd(:,:,i) = J'*Cbnd(:,:,i)*J;
-% end
-
-% new implementation of coriolis-centrifugal matrix
+% implementation of coriolis-centrifugal matrix
 Cpnd = zeros(6*n,6*n,m-1); % projected to joint space
 for i = 0:m-2
     term = zeros(6*n,6*n);
@@ -330,13 +273,8 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%% Gravity Forces %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% nth order derivative of gravity force (verified until 2nd order with numerical diff)
-% Qgravnd = zeros(n, m);
-% for i = 1 : m
-%     Qgravnd(:,i) = J'*Mbnd(:,:,i)*U*Vd_0;
-% end
 
-% 2nd implementation of gravity term (verified until any order)
+% implementation of gravity term (verified until any order)
 Qgravnd = zeros(n, m);
 for i = 0 : m - 1
     temp = zeros(n,6*n);
@@ -350,7 +288,7 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% nth order derivative of generalized forces (verified until 1st order, 2nd order not working)
+% nth order derivative of generalized forces 
 Qnd(:,1) = Q;   % init
 for i = 1:m-3
     im = i+1;
