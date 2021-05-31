@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% author: Shivesh Kumar
+% author: Shivesh Kumar and Andreas Mueller
 % last modified: October 26, 2020
 % remark: this code is by no means optimized
 
